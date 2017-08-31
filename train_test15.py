@@ -51,10 +51,10 @@ def train(epoch):
     order = range(0, nTrainPersons)
     np.random.shuffle(order)
     totalloss = 0.0
-    for i in xrange(0, nTrainPersons):
+    for i in xrange(0, 2*nTrainPersons):
         # print 'iter: ', i
         if i % 2 == 0:
-            seqA, seqB, camA, camB, startA, startB, seq_length = dataloader.getPosSample(dataset, trainList, order[i], opt['sampleSeqLen'])
+            seqA, seqB, camA, camB, startA, startB, seq_length = dataloader.getPosSample(dataset, trainList, order[i/2], opt['sampleSeqLen'])
             imagePixelDataA = dataset[seqA][camA]['data'][startA:startA + seq_length, :, :, :]
             imagePixelDataB = dataset[seqB][camB]['data'][startB:startB + seq_length, :, :, :]
             pair_labels = Variable(torch.FloatTensor([1])).cuda()
